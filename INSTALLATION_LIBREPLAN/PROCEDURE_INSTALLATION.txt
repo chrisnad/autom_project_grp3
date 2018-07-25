@@ -1,0 +1,51 @@
+Insatallation de la JDK :
+
+Copier-coller "jdk1.7.0_80" dans "C:\Installation\Java"
+(si récupération d'une jdk7 depuis internet, penser à copier le driver posgres pour jre7 dans le repertoire jre/lib/ext)
+
+
+POSTGRES :
+
+- Dans Postgre (pgAdmin) créer une base "libreplan"
+
+- Créer un "User" avec le script suivant:
+
+CREATE USER libreplan WITH PASSWORD 'libreplan';
+GRANT ALL PRIVILEGES ON DATABASE libreplan TO libreplan;
+REVOKE ALL
+ON ALL TABLES IN SCHEMA public
+FROM PUBLIC;
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON ALL TABLES IN SCHEMA public
+TO libreplan;
+
+- toujours dans pgAdmin, ouvrir le repertoire "Rôle de connexion" au bas de l'arborescence. 
+Exécuter un clic droit sur "libreplan", clic "propriétés" et dans l'onglet "Droits du rôle" tout cocher -> Ok
+
+- Sur la BDD "libreplan" executer les requêtes se trouvant dans le fichier "dump_libreplan.sql"
+
+- Dans les tables "end_date_comminication" et "subcontracted_deliver_date" renommé les colonnes "subcontrated..." en "subcontracted..."
+
+
+
+TOMCAT :
+
+- Dans "C:\Installation\Apache Software Foundation\Tomcat 8.0\bin" faire un double clic sur "Tomcat8w.exe",
+dans l'onglet "java" dans le champ "Java virtual machine:" copier-coller C:\Installation\Java\jdk1.7.0_80\jre\bin\server\jvm.dll
+dans le champ "Java Options:" rajouter à la fin ceci : -Dlibreplan-log-directory=C:\Libreplan
+valider
+
+- Copier-coller "libreplan.war" dans "C:\Installation\Apache Software Foundation\Tomcat 8.0\webapps"
+
+- Copier-coller "libreplan.xml" dans "C:\Installation\Apache Software Foundation\Tomcat 8.0\conf\Catalina\localhost"
+
+- Executer le "Tomcat8.exe" dans le "C:\Installation\Apache Software Foundation\Tomcat 8.0\bin"
+
+Dans "C:\Installation\Apache Software Foundation\Tomcat 8.0\bin" lancer "Tomcat8.exe" et le laisser tourner.
+
+
+
+
+LIBREPLAN :
+
+- Ouvrir le navigateur internet et copier-coller l'url suivante : http://localhost:8180/libreplan

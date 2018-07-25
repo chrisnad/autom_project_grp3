@@ -1,0 +1,4 @@
+C:\Installation\Java\jdk1.7.0_80\jre\bin\server\jvm.dll
+
+
+-Dlibreplan-log-directory=C:\Libreplan
